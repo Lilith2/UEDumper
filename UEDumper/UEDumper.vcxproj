@@ -78,8 +78,8 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>Frontend/ImGui/;Resources/AES/;Resources/Json/;Resources/Dumpspace/;../UEDumper/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>Frontend/ImGui/;Resources/AES/;Resources/Json/;Resources/Dumpspace/;../UEDumper/;$(SolutionDir)DMALib/;$(SolutionDir)DMALib/DMALib/libs;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)x64/Release/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,7 +146,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D3D11.lib;windowscodecs.lib;kernel32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>D3D11.lib;windowscodecs.lib;kernel32.lib;DMALib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
