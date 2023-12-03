@@ -30,11 +30,8 @@ DMAHandler target;
 //use the function "load" below which will contain data about the process name
 inline void init()
 {
-  
-
 	//...
 }
-
 
 /**
  * \brief use this function to initialize the target process
@@ -44,17 +41,16 @@ inline void init()
  */
 inline void loadData(std::string& processName, uint64_t& baseAddress, int& processID)
 {
-    const std::wstring str(processName.begin(), processName.end());
-    target.InitializeDMA(str.c_str(), false);
+	const std::wstring str(processName.begin(), processName.end());
+	target.InitializeDMA(str.c_str(), true);
 
-    //not initialized?
-    if (!target.isInitialized())
-        DebugBreak();
+	//not initialized?
+	if (!target.isInitialized())
+		DebugBreak();
 
-    processID = target.getPID();
+	processID = target.getPID();
 
-    baseAddress = target.getBaseAddress();
-
+	baseAddress = target.getBaseAddress();
 }
 
 /**
@@ -65,19 +61,18 @@ inline void loadData(std::string& processName, uint64_t& baseAddress, int& proce
  */
 inline void _read(const void* address, void* buffer, const DWORD64 size)
 {
-    size_t bytes_read = 0;
-    BOOL b = target.read(reinterpret_cast<ULONG64>(address), reinterpret_cast<ULONG64>(buffer), size);
-    //if failed, try with lower byte amount
-    if (!b)
-    {
-        //always read 10 bytes lower
-	    for(int i = 1; i < size && !b; i+= 10)
-	    {
-            b = target.read(reinterpret_cast<ULONG64>(address), reinterpret_cast<ULONG64>(buffer), size - i);
-	    }
-    }
+	size_t bytes_read = 0;
+	BOOL b = target.read(reinterpret_cast<ULONG64>(address), reinterpret_cast<ULONG64>(buffer), size);
+	//if failed, try with lower byte amount
+	if (!b)
+	{
+		//always read 10 bytes lower
+		for (int i = 1; i < size && !b; i += 10)
+		{
+			b = target.read(reinterpret_cast<ULONG64>(address), reinterpret_cast<ULONG64>(buffer), size - i);
+		}
+	}
 }
-
 
 /**
  * \brief write function (replace with your write logic)
@@ -87,5 +82,5 @@ inline void _read(const void* address, void* buffer, const DWORD64 size)
  */
 inline void _write(void* address, const void* buffer, const DWORD64 size)
 {
-    target.write(reinterpret_cast<ULONG64>(address), reinterpret_cast<ULONG64>(buffer), size);
+	target.write(reinterpret_cast<ULONG64>(address), reinterpret_cast<ULONG64>(buffer), size);
 }

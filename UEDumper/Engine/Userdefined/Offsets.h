@@ -32,15 +32,22 @@
 
 enum OffsetFlags
 {
-	OFFSET_LIVE_EDITOR = 1 << 0, //use this if the offset should be displayed in the live editor
-	OFFSET_DS = 1 << 1, //use this if the offset should be added to dumpspace when creating dumpspace files
-	OFFSET_ADDRESS = 1 << 2, //use this if the offset is at base + address
-	OFFSET_SIGNATURE = 1 << 3, //dont use directly
-	OFFSET_SIG_RVA = 1 << 4, //dont use directly
-	OFFSET_SIG_DIR = 1 << 5, //dont use directly
-	OFFSET_SINGNATURE_DIRECT = OFFSET_SIGNATURE | OFFSET_SIG_DIR, //use this if the signature start is the offset
-	OFFSET_SIGNATURE_FOLLOW = OFFSET_SIGNATURE | OFFSET_SIG_RVA, //use this if the offset is at the signature + rva
-
+	OFFSET_LIVE_EDITOR = 1 << 0,
+	//use this if the offset should be displayed in the live editor
+	OFFSET_DS = 1 << 1,
+	//use this if the offset should be added to dumpspace when creating dumpspace files
+	OFFSET_ADDRESS = 1 << 2,
+	//use this if the offset is at base + address
+	OFFSET_SIGNATURE = 1 << 3,
+	//dont use directly
+	OFFSET_SIG_RVA = 1 << 4,
+	//dont use directly
+	OFFSET_SIG_DIR = 1 << 5,
+	//dont use directly
+	OFFSET_SINGNATURE_DIRECT = OFFSET_SIGNATURE | OFFSET_SIG_DIR,
+	//use this if the signature start is the offset
+	OFFSET_SIGNATURE_FOLLOW = OFFSET_SIGNATURE | OFFSET_SIG_RVA,
+	//use this if the offset is at the signature + rva
 };
 
 struct Offset
@@ -104,9 +111,9 @@ inline std::vector<Offset> setOffsets()
 {
 	std::vector<Offset> offsets;
 
-	offsets.push_back({ OFFSET_ADDRESS | OFFSET_DS, "OFFSET_GNAMES", 0xEAD3AC0 });
-	offsets.push_back({ OFFSET_ADDRESS | OFFSET_DS, "OFFSET_GOBJECTS", 0xE9125C0 });
-	offsets.push_back({ OFFSET_ADDRESS | OFFSET_DS | OFFSET_LIVE_EDITOR, "OFFSET_UWORLD", 0x78915F8 });
+	offsets.push_back({OFFSET_ADDRESS | OFFSET_DS, "OFFSET_GNAMES", 0x80E3040}); //0x80E3040
+	offsets.push_back({OFFSET_ADDRESS | OFFSET_DS, "OFFSET_GOBJECTS", 0x0817EFE0}); //0x8182060
+	offsets.push_back({OFFSET_ADDRESS | OFFSET_DS | OFFSET_LIVE_EDITOR, "OFFSET_UWORLD", 0x82D95E0});
 
 	//offsets.push_back({ OFFSET_ADDRESS | OFFSET_DH, "OFFSET_GNAMES", 0x562D340 });
 	//offsets.push_back({ OFFSET_ADDRESS | OFFSET_DH, "OFFSET_GOBJECTS", 0x545C6E0 });
